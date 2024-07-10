@@ -12,29 +12,36 @@
                             <h2 class="title-4 mb-2">Login</h2>
                             <p class="desc-content">Please login using account details bellow.</p>
                         </div>
-                        <form action="#" method="post">
+
+                        <form action="{{ url('/user/processTologin') }}" method="POST">
+                            @csrf
                             <div class="single-input-item mb-3">
-                                <input type="email" placeholder="Email">
+                                <input type="email" id="email" placeholder="*Email"
+                                    class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+
                             <div class="single-input-item mb-3">
-                                <input type="password" placeholder="Enter your Password">
-                            </div>
-                            <div class="single-input-item mb-3">
-                                <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
-                                    <div class="remember-meta mb-3">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="rememberMe">
-                                            <label class="custom-control-label" for="rememberMe">Remember Me</label>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="forget-pwd mb-3">Forget Password?</a>
-                                </div>
+                                <input type="password" placeholder="*Type your Password"
+                                    class="@error('password') is-invalid @enderror" name="password"
+                                    value="{{ old('password') }}">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="single-input-item mb-3">
                                 <button class="btn obrien-button-2 primary-color">Login</button>
                             </div>
                             <div class="single-input-item">
-                                <a href="register.html">Creat Account</a>
+                                <a href="{{ url('/user/signup') }}">Creat Account</a>
                             </div>
                         </form>
                     </div>

@@ -20,11 +20,13 @@ Route::controller(FrontendController::class)->group(function () {
 });
 
 
+
 Route::prefix('user')->group(function () {
     Route::middleware(['web'])->group(function () {
         Route::get('signup', [ProfileController::class, 'signUp']);
         Route::get('login', [ProfileController::class, 'login']);
         Route::post('new-register', [ProfileController::class, 'newRegister']);
+        Route::post('/processTologin', [ProfileController::class, 'processToLogin']);
     });
 });
 

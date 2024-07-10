@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -44,5 +45,20 @@ class ProfileController extends Controller
         ]);
 
         return redirect('/user/login');
+    }
+
+    public function processToLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required | email',
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt(['email'  => $request->email, 'password' => $request->password]))
+        {
+            return 'success';
+        }else{
+            return 'fail';
+        }
     }
 }
